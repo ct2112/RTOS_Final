@@ -66,6 +66,8 @@ OS_MUTEX mutex1;
 OS_MUTEX mutex2;
 OS_TMR myTimer;
 
+OS_SEM LCDSem;
+OS_SEM PHYSem;
 RTOS_ERR err;
 
 #define LED0_FLAG 1
@@ -80,7 +82,17 @@ typedef struct speed_info{
 	int decrements;
 
 }speed_info;
-
+enum Theta {
+	ZERO, M_PI4, M_PI3, M_PI2, M_PI1
+};
+typedef struct physics{
+	enum Theta theta;
+	double acc;
+	double vel;
+	int weight;
+	int position;
+}physics;
+physics physicState;
 
 enum dir_opt {HARD_LEFT, SOFT_LEFT, NO_DIR, SOFT_RIGHT, HARD_RIGHT};
 typedef struct dir_info{
